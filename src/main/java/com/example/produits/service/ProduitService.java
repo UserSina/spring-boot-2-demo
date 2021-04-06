@@ -2,6 +2,8 @@ package com.example.produits.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.example.produits.entities.Produit;
 
 public interface ProduitService {
@@ -11,4 +13,6 @@ public interface ProduitService {
 	void deleteProduitById(Long id);
 	Produit getProduit(Long id);
 	List<Produit> getAllProduits();
+	
+	Page<Produit> getAllProduitsParPage(int page, int size);
 }
