@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
+import com.example.produits.entities.Categorie;
 import com.example.produits.entities.Produit;
 import com.example.produits.repos.ProduitRepository;
 import com.example.produits.service.ProduitService;
 
 @SpringBootTest
 class ProduitsApplicationTests {
+	
 	@Autowired
 	private ProduitRepository produitRepository;
 	
@@ -67,4 +69,57 @@ class ProduitsApplicationTests {
 		System.out.println(p);
 		} */
 	}
+	
+	@Test
+	public void testFindByNomProduit() {
+		List<Produit> prods = produitRepository.findByNomProduit("PC Dell");
+		for(Produit p:prods)
+			System.out.println(p);
+	}
+	
+	@Test
+	public void testfindByNomProduitContains() {
+		List<Produit> prods = produitRepository.findByNomProduitContains("eps");
+		for(Produit p:prods)
+			System.out.println(p);
+	}
+	
+	@Test
+	public void testfindByNomPrix() {
+		List<Produit> prods = produitRepository.findByNomPrix("PC Dell", 2200.5);
+		for (Produit p : prods)
+			System.out.println(p);
+	}
+	
+	@Test
+	public void testfindByCategorie() {
+		Categorie cat = new Categorie();
+		cat.setIdCat(1L);
+		List<Produit> prods = produitRepository.findByCategorie(cat);
+		for (Produit p : prods)
+			System.out.println(p);
+	}
+	
+	@Test
+	public void findByCategorieIdCat() {
+		List<Produit> prods = produitRepository.findByCategorieIdCat(1L);
+		for (Produit p : prods)
+			System.out.println(p);
+	}
+	
+	@Test
+	public void testfindByOrderByNomProduitAsc() {
+		List<Produit> prods =
+		produitRepository.findByOrderByNomProduitAsc();
+		for (Produit p : prods)
+			System.out.println(p);
+	}
+	
+	@Test
+	public void testTrierProduitsNomsPrix() {
+	List<Produit> prods = produitRepository.trierProduitsNomsPrix();
+	for (Produit p : prods)
+		System.out.println(p);
+	}
+	
 }
